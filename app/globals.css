@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: #f5f0ea;
+  --brown: #3e2723;
+  --caramel: #c68b59;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  background-image: radial-gradient(circle at 12% 0%, rgba(198, 139, 89, 0.16), transparent 45%),
+    radial-gradient(circle at 88% 12%, rgba(62, 39, 35, 0.07), transparent 40%);
+  color: var(--brown);
+}
+
+::selection {
+  background-color: var(--caramel);
+  color: #fff;
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown;
+  }
+
+  .btn-primary {
+    @apply btn bg-caramel text-white shadow-lg shadow-caramel/30 hover:-translate-y-0.5 hover:bg-caramel-dark hover:shadow-xl;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-caramel/30 bg-caramel/10 px-4 py-1.5 text-xs font-bold text-caramel-dark;
+  }
+
+  .section-title {
+    @apply mt-4 text-3xl font-black leading-tight text-brown sm:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-3 max-w-xl text-sm leading-7 text-brown-light sm:text-base;
+  }
+}
