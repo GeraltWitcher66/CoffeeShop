@@ -1,0 +1,24 @@
+{
+  "name": "کافه دان | فروشگاه تخصصی قهوه",
+  "short_name": "کافه دان",
+  "description": "فروشگاه تخصصی قهوه؛ دانهٔ تازه‌برشته، نوشیدنی گرم و سرد و لوازم دم‌آوری.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/CoffeeShop/",
+  "scope": "/CoffeeShop/",
+  "display": "standalone",
+  "background_color": "#F5F0EA",
+  "theme_color": "#3E2723",
+  "icons": [
+    {
+      "src": "/CoffeeShop/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/CoffeeShop/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/CoffeeShop/fonts/Vazirmatn-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,6 +32,25 @@ body {
   color: #fff;
 }
 
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast {
+  animation: toast-in 0.25s ease-out;
+}
+
+.price-range {
+  accent-color: var(--caramel);
+}
+
 @layer components {
   .container-page {
     @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
@@ -37,6 +64,10 @@ body {
     @apply btn bg-caramel text-white shadow-lg shadow-caramel/30 hover:-translate-y-0.5 hover:bg-caramel-dark hover:shadow-xl;
   }
 
+  .btn-ghost {
+    @apply btn border border-brown/20 bg-transparent text-brown hover:border-brown/40 hover:bg-brown/5;
+  }
+
   .eyebrow {
     @apply inline-flex items-center gap-2 rounded-full border border-caramel/30 bg-caramel/10 px-4 py-1.5 text-xs font-bold text-caramel-dark;
   }
@@ -47,5 +78,25 @@ body {
 
   .section-subtitle {
     @apply mt-3 max-w-xl text-sm leading-7 text-brown-light sm:text-base;
+  }
+
+  .card-surface {
+    @apply border border-brown/20 bg-white/70 shadow-[0_18px_40px_-32px_rgba(62,39,35,0.45)];
+  }
+
+  .card-scrim {
+    @apply pointer-events-none absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-brown/5;
+  }
+
+  .skip-link {
+    @apply fixed right-4 top-3 z-[100] -translate-y-24 rounded-full bg-brown px-5 py-2.5 text-xs font-bold text-cream shadow-soft transition focus:translate-y-0;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-brown/15 bg-white/60 px-4 py-3 text-sm text-brown outline-none transition placeholder:text-brown-light/50 focus:border-caramel focus:bg-white;
+  }
+
+  .field-label {
+    @apply mb-2 block text-xs font-bold text-brown;
   }
 }

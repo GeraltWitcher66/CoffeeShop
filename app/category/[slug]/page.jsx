@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import CategoryProducts from '@/components/CategoryProducts';
+import ProductBrowser from '@/components/ProductBrowser';
+import { ArrowLeftIcon } from '@/components/Icons';
 import { categories, productsInCategory } from '@/lib/store-data';
 
 const basePath = '/CoffeeShop';
@@ -35,7 +36,7 @@ export default async function CategoryPage({ params }) {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <section className="py-10 sm:py-14">
           <div className="container-page">
             <nav className="flex flex-wrap items-center gap-2 text-xs text-brown-light">
@@ -80,9 +81,9 @@ export default async function CategoryPage({ params }) {
             </div>
 
             {categoryProducts.length > 0 ? (
-              <CategoryProducts products={categoryProducts} />
+              <ProductBrowser products={categoryProducts} />
             ) : (
-              <div className="mt-8 rounded-3xl border border-brown/10 bg-cream px-6 py-14 text-center">
+              <div className="card-surface mt-8 rounded-3xl px-6 py-14 text-center">
                 <p className="text-sm font-black text-brown">هنوز محصولی در این دسته ثبت نشده است.</p>
                 <p className="mt-2 text-xs text-brown-light">
                   به‌زودی دانه‌های تازهٔ این دسته اضافه می‌شود.
@@ -106,22 +107,14 @@ export default async function CategoryPage({ params }) {
                       sizes="(max-width: 640px) 100vw, 33vw"
                       className="object-cover transition duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-brown/5" />
+                    <div className="card-scrim" />
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
                       <div>
                         <h3 className="text-base font-black text-cream">{item.title}</h3>
                         <p className="mt-1 text-[11px] text-cream/65">{item.description}</p>
                       </div>
                       <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-cream/30 text-cream transition group-hover:border-caramel group-hover:bg-caramel group-hover:text-white">
-                        <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                          <path
-                            d="M19 12H5m6-6-6 6 6 6"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        <ArrowLeftIcon />
                       </span>
                     </div>
                   </a>

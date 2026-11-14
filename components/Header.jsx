@@ -4,15 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { formatPrice, storeInfo } from '@/lib/store-data';
+import { CartIcon, CloseIcon } from '@/components/Icons';
 import { useCart } from '@/components/CartProvider';
 
 const basePath = '/CoffeeShop';
 
 const navLinks = [
-  { label: 'خانه', href: `${basePath}/#top` },
+  { label: 'خانه', href: `${basePath}/` },
+  { label: 'همهٔ محصولات', href: `${basePath}/products/` },
   { label: 'دسته‌بندی‌ها', href: `${basePath}/#categories` },
-  { label: 'محصولات ویژه', href: `${basePath}/#products` },
   { label: 'داستان ما', href: `${basePath}/#story` },
+  { label: 'علاقه‌مندی‌ها', href: `${basePath}/favorites/` },
   { label: 'تماس با ما', href: `${basePath}/#contact` },
 ];
 
@@ -25,6 +27,17 @@ export default function Header() {
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+
+    function handleEscape(event) {
+      if (event.key === 'Escape') setIsMenuOpen(false);
+    }
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -116,7 +129,7 @@ export default function Header() {
 
           <div className="flex items-center gap-3">
             <a
-              href={`${basePath}/#products`}
+              href={`${basePath}/products/`}
               className="btn-primary hidden !px-5 !py-2.5 text-xs sm:inline-flex"
             >
               سفارش قهوه
@@ -130,17 +143,7 @@ export default function Header() {
                 aria-label={`سبد خرید، ${countLabel} کالا`}
                 aria-expanded={isOpen}
               >
-                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-                  <path
-                    d="M3 4h2l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L21 8H6"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="10" cy="20" r="1.4" fill="currentColor" />
-                  <circle cx="17" cy="20" r="1.4" fill="currentColor" />
-                </svg>
+                <CartIcon />
                 <span className="hidden text-xs font-black sm:block">{formatPrice(subtotal)}</span>
                 <span className="absolute -top-1.5 -left-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-caramel px-1 text-[10px] font-black text-white">
                   {countLabel}
@@ -175,14 +178,7 @@ export default function Header() {
                         aria-label="بستن سبد خرید"
                         className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-brown/10 bg-white text-brown shadow-md transition hover:bg-cream-dark hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-caramel"
                       >
-                        <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                          <path
-                            d="M6 6l12 12M18 6L6 18"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                          />
-                        </svg>
+                        <CloseIcon />
                       </button>
                     </div>
 
@@ -262,6 +258,13 @@ export default function Header() {
                       >
                         مشاهدهٔ سبد خرید
                       </a>
+                      <a
+                        href={`${basePath}/checkout/`}
+                        onClick={() => setIsOpen(false)}
+                        className="mt-3 block text-center text-[11px] font-bold text-brown-light transition hover:text-caramel-dark"
+                      >
+                        تسویه حساب سریع
+                      </a>
                     </div>
                   </aside>
                 </>,
@@ -275,6 +278,7 @@ export default function Header() {
               className="grid h-11 w-11 place-items-center rounded-full border border-brown/15 text-brown transition hover:border-caramel lg:hidden"
               aria-label="منو"
               aria-expanded={isMenuOpen}
+              aria-controls="mobile-nav"
             >
               <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
                 {isMenuOpen ? (
@@ -298,7 +302,7 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
-          <nav className="border-t border-brown/10 bg-cream lg:hidden">
+          <nav id="mobile-nav" className="border-t border-brown/10 bg-cream lg:hidden">
             <div className="container-page flex flex-col py-4 text-sm font-bold text-brown">
               {navLinks.map((link) => (
                 <a

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ArrowLeftIcon } from '@/components/Icons';
 import { stats, storeInfo } from '@/lib/store-data';
 
 const basePath = '/CoffeeShop';
@@ -7,7 +8,7 @@ export default function Hero() {
   return (
     <section id="top" className="relative isolate flex min-h-[calc(100svh-7.5rem)] items-center overflow-hidden">
       <Image
-        src={`${basePath}/images/hero.jpg`}
+        src={`${basePath}/images/hero.webp`}
         alt="دانه‌های قهوهٔ تازه‌برشته"
         fill
         priority
@@ -38,15 +39,7 @@ export default function Hero() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a href="#products" className="btn-primary">
             خرید قهوه
-            <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-              <path
-                d="M19 12H5m6-6-6 6 6 6"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ArrowLeftIcon />
           </a>
           <a
             href="#story"

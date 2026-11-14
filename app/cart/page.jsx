@@ -11,7 +11,7 @@ export default function CartPage() {
   return (
     <>
       <Header />
-      <main>
+      <main id="main-content">
         <CartView />
       </main>
       <Footer />

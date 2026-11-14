@@ -30,7 +30,7 @@ export default function Story() {
         <div className="relative order-2 lg:order-1">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-cream-dark shadow-soft">
             <Image
-              src={`${basePath}/images/story-roaster.jpg`}
+              src={`${basePath}/images/story-roaster.webp`}
               alt="برشته‌کردن دانه‌های قهوه در برشته‌کن کافه دان"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

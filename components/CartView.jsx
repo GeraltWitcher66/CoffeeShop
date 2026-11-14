@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import { formatPrice, storeInfo } from '@/lib/store-data';
 import { useCart } from '@/components/CartProvider';
@@ -10,7 +9,6 @@ const basePath = '/CoffeeShop';
 export default function CartView() {
   const { items, totalCount, subtotal, shipping, totalPrice, updateQuantity, removeItem, clearCart } =
     useCart();
-  const [notice, setNotice] = useState('');
 
   const countLabel = new Intl.NumberFormat('fa-IR').format(totalCount);
 
@@ -18,7 +16,7 @@ export default function CartView() {
     return (
       <section className="py-16 sm:py-24">
         <div className="container-page">
-          <div className="mx-auto flex max-w-lg flex-col items-center rounded-[2rem] border border-brown/10 bg-cream px-6 py-16 text-center">
+          <div className="card-surface mx-auto flex max-w-lg flex-col items-center rounded-[2rem] px-6 py-16 text-center">
             <span className="grid h-16 w-16 place-items-center rounded-full bg-caramel/15 text-caramel-dark">
               <svg viewBox="0 0 24 24" fill="none" className="h-7 w-7" aria-hidden="true">
                 <path
@@ -66,7 +64,7 @@ export default function CartView() {
             {items.map(({ product, quantity }) => (
               <article
                 key={product.id}
-                className="flex gap-4 rounded-3xl border border-brown/10 bg-cream p-4 sm:gap-5 sm:p-5"
+                className="card-surface flex gap-4 rounded-3xl p-4 sm:gap-5 sm:p-5"
               >
                 <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-2xl bg-gradient-to-br from-cream-dark to-caramel/40 sm:h-32 sm:w-28">
                   <Image
@@ -112,7 +110,8 @@ export default function CartView() {
                       <button
                         type="button"
                         onClick={() => updateQuantity(product.id, 1)}
-                        className="grid h-7 w-7 place-items-center rounded-full text-brown transition hover:bg-brown/5"
+                        disabled={quantity >= product.stock}
+                        className="grid h-7 w-7 place-items-center rounded-full text-brown transition hover:bg-brown/5 disabled:cursor-not-allowed disabled:opacity-30"
                         aria-label={`افزایش تعداد ${product.name}`}
                       >
                         +
@@ -141,7 +140,7 @@ export default function CartView() {
             </div>
           </div>
 
-          <aside className="rounded-3xl border border-brown/10 bg-cream p-6 lg:sticky lg:top-32 lg:col-span-1">
+          <aside className="card-surface rounded-3xl p-6 lg:sticky lg:top-32 lg:col-span-1">
             <h2 className="text-base font-black text-brown">خلاصهٔ سفارش</h2>
 
             <dl className="mt-5 space-y-3 text-sm">
@@ -167,19 +166,13 @@ export default function CartView() {
               <span className="text-lg font-black text-brown">{formatPrice(totalPrice)}</span>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setNotice('این قالب نمایشی است و درگاه پرداخت ندارد.')}
-              className="btn-primary mt-6 w-full"
-            >
+            <a href={`${basePath}/checkout/`} className="btn-primary mt-6 w-full">
               ادامهٔ فرآیند خرید
-            </button>
+            </a>
 
-            {notice && (
-              <p className="mt-3 rounded-xl bg-brown/5 px-3 py-2 text-center text-[11px] leading-5 text-brown-light">
-                {notice}
-              </p>
-            )}
+            <p className="mt-3 rounded-xl bg-brown/5 px-3 py-2 text-center text-[11px] leading-5 text-brown-light">
+              ثبت سفارش بدون درگاه پرداخت انجام می‌شود؛ برای هماهنگی نهایی با شما تماس می‌گیریم.
+            </p>
 
             <p className="mt-4 text-center text-[11px] leading-5 text-brown-light/80">
               پشتیبانی {storeInfo.phone} — هر روز ۹ تا ۲۱

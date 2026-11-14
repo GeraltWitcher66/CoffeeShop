@@ -1,8 +1,8 @@
 import Image from 'next/image';
+import { ArrowLeftIcon } from '@/components/Icons';
 import { categories, productsInCategory } from '@/lib/store-data';
 
 const basePath = '/CoffeeShop';
-const cardScrim = 'absolute inset-0 bg-gradient-to-t from-brown via-brown/60 to-brown/5';
 const countLabel = (categoryId) =>
   `${new Intl.NumberFormat('fa-IR').format(productsInCategory(categoryId).length)} محصول`;
 
@@ -35,7 +35,7 @@ export default function Categories() {
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover transition duration-700 group-hover:scale-105"
             />
-            <div className={cardScrim} />
+            <div className="card-scrim" />
             <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
               <span className="rounded-full bg-caramel px-3 py-1 text-[10px] font-bold text-white">
                 محبوب‌ترین انتخاب
@@ -45,15 +45,7 @@ export default function Categories() {
               <div className="mt-6 flex items-center gap-4 text-xs font-bold text-cream/80">
                 <span>{countLabel(featured.id)}</span>
                 <span className="grid h-11 w-11 place-items-center rounded-full border border-white/40 bg-white/20 text-cream shadow-lg shadow-brown/30 backdrop-blur-md transition group-hover:border-caramel group-hover:bg-caramel group-hover:text-white">
-                  <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                    <path
-                      d="M19 12H5m6-6-6 6 6 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <ArrowLeftIcon />
                 </span>
               </div>
             </div>
@@ -74,7 +66,7 @@ export default function Categories() {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover transition duration-700 group-hover:scale-105"
               />
-              <div className={cardScrim} />
+              <div className="card-scrim" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5">
                 <div>
                   <h3 className="text-lg font-black text-cream">{category.title}</h3>
